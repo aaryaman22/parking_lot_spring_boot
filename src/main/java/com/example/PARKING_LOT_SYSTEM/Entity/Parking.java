@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.boot.autoconfigure.web.WebProperties;
 
+import java.util.List;
+
 @Entity
 @Table(name = "PARKING_LEVELS")
 @Getter
@@ -11,6 +13,7 @@ import org.springframework.boot.autoconfigure.web.WebProperties;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@NamedEntityGraph(name = "level.slots" , attributeNodes = {@NamedAttributeNode("slotsList")})
 public class Parking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,4 +36,8 @@ public class Parking {
 
     @Column(name = "AVAILABLE_BUS_SPOTS")
     private int availableBusSpot;
+
+    @OneToMany
+    @JoinColumn(name = "LEVEL_ID" , referencedColumnName = "ID")
+    private List<Slot> slotsList;
 }

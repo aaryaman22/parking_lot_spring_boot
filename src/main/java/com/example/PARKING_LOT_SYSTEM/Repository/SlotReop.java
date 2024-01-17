@@ -1,8 +1,12 @@
 package com.example.PARKING_LOT_SYSTEM.Repository;
 
+import com.example.PARKING_LOT_SYSTEM.Entity.Parking;
 import com.example.PARKING_LOT_SYSTEM.Entity.Slot;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+
+import java.util.List;
+import java.util.Optional;
 
 public interface SlotReop extends JpaRepository<Slot, Integer> {
     Slot findByLevelId(int i);
@@ -14,5 +18,7 @@ public interface SlotReop extends JpaRepository<Slot, Integer> {
 //
 //    @Query("update u set u.occupied = (false) where u.SR_NUMBER = :slotId")
 //    public void updateSpotToLeave(int slotId);
+    Optional<Slot> findFirstByTypeAndOccupiedFalse(String type);
+    List<Slot> findAllByLevelId(int levelId);
 
 }

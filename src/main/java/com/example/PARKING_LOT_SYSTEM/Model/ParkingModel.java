@@ -3,6 +3,8 @@ package com.example.PARKING_LOT_SYSTEM.Model;
 import jakarta.persistence.Column;
 import lombok.*;
 
+import java.util.List;
+
 @Getter
 @Setter
 @Builder
@@ -16,6 +18,7 @@ public class ParkingModel {
     private int availableBikeSpot;
     private int availableCarSpot;
     private int availableBusSpot;
+    private List<SlotModel> slotList;
 
     @Override
     public String toString() {

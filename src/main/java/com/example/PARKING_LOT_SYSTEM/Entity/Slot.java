@@ -1,5 +1,7 @@
 package com.example.PARKING_LOT_SYSTEM.Entity;
 
+import com.example.PARKING_LOT_SYSTEM.Model.VehicleModel;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -14,13 +16,17 @@ public class Slot {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     //@Column(name = "SR_NUMBER") DO WE HAVE TO MENTION IT /?
-    private int id;
+    private Integer id;
     @Column(name = "SLOT_NUMBER")
-    private int slotNumber;
+    private Integer slotNumber;
     @Column(name = "LEVEL_ID")
-    private int levelId;
+    private Integer levelId;
     @Column(name = "TYPE")
     private String type;
     @Column(name = "OCCUPIED")
     private Boolean occupied;
+
+    @OneToOne(mappedBy = "slot")
+    private VehicleDetails vehicleDetails;
+
 }

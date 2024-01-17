@@ -1,9 +1,7 @@
 package com.example.PARKING_LOT_SYSTEM.Entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
@@ -19,8 +17,10 @@ public class VehicleDetails {
     private String regestrationNumber;
     @Column(name = "VEHICLE_TYPE")
     private String type;
-    @Column(name = "LEVEL_ID")
-    private int levelId;
     @Column(name = "SLOT_SR_NUMBER")
-    private int slotSrNumber;
+    private Integer slotSrNumber;
+
+    @OneToOne
+    @JoinColumn(name = "SLOT_SR_NUMBER", insertable = false, updatable = false)
+    private Slot slot;
 }
