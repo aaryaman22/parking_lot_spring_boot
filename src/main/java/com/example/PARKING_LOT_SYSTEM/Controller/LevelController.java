@@ -5,10 +5,7 @@ import com.example.PARKING_LOT_SYSTEM.Responses.Response;
 import com.example.PARKING_LOT_SYSTEM.Services.ParkingServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class LevelController {
@@ -18,13 +15,21 @@ public class LevelController {
     ResponseEntity<Boolean> addLevel(@RequestBody ParkingModel parkingModel)
     {
         Response<Boolean> response = parkingServices.addLevel(parkingModel);
-        return null;
+        return new ResponseEntity<>(response.getReturnObject() , response.getHttpStatus());
     }
 
     @DeleteMapping("/decreaseLevel")
     ResponseEntity<Integer> deleteLevel()
     {
         Response<Integer> response = parkingServices.deleteLevel();
+        return new ResponseEntity<>(response.getReturnObject() , response.getHttpStatus());
+    }
+
+
+    @DeleteMapping("/unpark/{regNo}")
+    ResponseEntity<Boolean> unparkVehicle(@PathVariable("regNo") String registrationNumber)
+    {
+        Response<Boolean> response = parkingServices.removeVehicle(registrationNumber);
         return new ResponseEntity<>(response.getReturnObject() , response.getHttpStatus());
     }
 }

@@ -4,6 +4,7 @@ import com.example.PARKING_LOT_SYSTEM.Model.ParkingModel;
 import com.example.PARKING_LOT_SYSTEM.Model.VehicleModel;
 import com.example.PARKING_LOT_SYSTEM.Responses.Response;
 import com.example.PARKING_LOT_SYSTEM.Services.ParkingServices;
+import com.example.PARKING_LOT_SYSTEM.Services.VehicleServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,19 +21,6 @@ public class ParkingController {
     ResponseEntity<VehicleModel> addVehicle(@PathVariable("type") String type , @PathVariable("regNo") String registrationNumber)
     {
         Response<VehicleModel> response = parkingServices.addVehicle(type , registrationNumber);
-        return new ResponseEntity<>(response.getReturnObject() , response.getHttpStatus());
-    }
-    @DeleteMapping("/unpark/{regNo}")
-    ResponseEntity<Boolean> unparkVehicle(@PathVariable("regNo") String registrationNumber)
-    {
-        Response<Boolean> response = parkingServices.removeVehicle(registrationNumber);
-        return new ResponseEntity<>(response.getReturnObject() , response.getHttpStatus());
-    }
-
-    @GetMapping("/getinfo/{regNo}")
-    ResponseEntity<VehicleModel> getInfo(@PathVariable("regNo") String registrationNumber)
-    {
-        Response<VehicleModel> response = parkingServices.getVehicleInfo(registrationNumber);
         return new ResponseEntity<>(response.getReturnObject() , response.getHttpStatus());
     }
 

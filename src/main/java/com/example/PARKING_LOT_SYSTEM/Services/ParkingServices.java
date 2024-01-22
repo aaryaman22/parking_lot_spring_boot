@@ -14,10 +14,10 @@ public interface ParkingServices {
 
     Response<VehicleModel> addVehicle(String type , String registrationNumber);
 
-    Response<Boolean> removeVehicle(String registrationNumber);
-
-    Response<VehicleModel> getVehicleInfo(String registrationNumber);
-
+    public Response<Boolean> removeVehicle(String registrationNumber);
+    void updateAvailibilityInLevel(int levelId , String type);
+    //
+    // Response<Boolean> removeVehicle(String registrationNumber);
     Response<Integer> deleteLevel();
 
     Response<List<ParkingModel>> getStatistics();

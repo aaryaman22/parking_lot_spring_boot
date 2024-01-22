@@ -2,15 +2,13 @@ package com.example.PARKING_LOT_SYSTEM.Model;
 
 import com.example.PARKING_LOT_SYSTEM.Entity.VehicleDetails;
 import jakarta.persistence.Column;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class SlotModel {
