@@ -1,8 +1,10 @@
 package com.example.PARKING_LOT_SYSTEM.Entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.sql.Date;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "VEHICLE_DETAILS")
@@ -19,6 +21,8 @@ public class VehicleDetails {
     private String type;
     @Column(name = "SLOT_SR_NUMBER")
     private Integer slotSrNumber;
+    @Column(name = "DATE")
+    private LocalDateTime localDateTime;
 
     @OneToOne
     @JoinColumn(name = "SLOT_SR_NUMBER", insertable = false, updatable = false)

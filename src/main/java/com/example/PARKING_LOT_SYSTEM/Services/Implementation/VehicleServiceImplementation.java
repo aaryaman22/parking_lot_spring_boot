@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -23,8 +25,9 @@ public class VehicleServiceImplementation implements VehicleServices {
         vehicleDetails.setRegestrationNumber(registrationNumber);
         vehicleDetails.setType(type);
         vehicleDetails.setSlotSrNumber(slotOfLevel);
+        vehicleDetails.setLocalDateTime(LocalDateTime.now());
         vehicleRepo.save(vehicleDetails);
-        VehicleModel vehicleModel = VehicleModel.builder().regestrationNumber(vehicleDetails.getRegestrationNumber()).type(vehicleDetails.getType()).slotSrNumber(vehicleDetails.getSlotSrNumber()).build();
+        VehicleModel vehicleModel = VehicleModel.builder().regestrationNumber(vehicleDetails.getRegestrationNumber()).type(vehicleDetails.getType()).slotSrNumber(vehicleDetails.getSlotSrNumber()).localDateTime(LocalDateTime.now()).build();
         return vehicleModel;
     }
     @Override
@@ -32,7 +35,7 @@ public class VehicleServiceImplementation implements VehicleServices {
         Optional<VehicleDetails> vehicleDetails = vehicleRepo.findById(registrationNumber);
 
         if (vehicleDetails.isEmpty()) return new Response<>(null, HttpStatus.NOT_FOUND);
-        return new Response<>(vehicleDetails.map(value -> new VehicleModel(value.getRegestrationNumber(), value.getType(), value.getSlotSrNumber())).orElse(null));
+        return new Response<>(vehicleDetails.map(value -> new VehicleModel(value.getRegestrationNumber(), value.getType(), value.getSlotSrNumber() , value.getLocalDateTime())).orElse(null));
     }
 
     @Override
@@ -41,5 +44,11 @@ public class VehicleServiceImplementation implements VehicleServices {
         if (vehicalOnSpot.isPresent()) {
             vehicleRepo.delete(vehicalOnSpot.get());
         }
+    }
+
+    @Override
+    public List<VehicleModel> getVehicle() {
+        List<VehicleDetails> allVehicle = vehicleRepo.findAll();
+        return allVehicle.stream().map(x -> new VehicleModel(x.getRegestrationNumber() , x.getType() , x.getSlotSrNumber() , x.getLocalDateTime())).toList();
     }
 }

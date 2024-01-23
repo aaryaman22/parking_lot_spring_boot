@@ -165,7 +165,7 @@ public class ParkingImplementation implements ParkingServices {
 
         return list.stream().map(x -> new SlotModel(x.getId(), x.getSlotNumber(), x.getLevelId(), x.getType(), x.getOccupied(),
                Optional.ofNullable(x.getVehicleDetails()).map(vd-> new VehicleModel(vd.getRegestrationNumber()
-               ,vd.getType() , vd.getSlotSrNumber())).orElse(null)
+               ,vd.getType() , vd.getSlotSrNumber() , vd.getLocalDateTime())).orElse(null)
         )).toList();
 
     }

@@ -1,7 +1,9 @@
 package com.example.PARKING_LOT_SYSTEM.Model;
 
-import jakarta.persistence.Column;
 import lombok.*;
+
+import java.sql.Date;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -12,4 +14,5 @@ public class VehicleModel {
     private String regestrationNumber;
     private String type;
     private int slotSrNumber;
+    private LocalDateTime localDateTime;
 }
