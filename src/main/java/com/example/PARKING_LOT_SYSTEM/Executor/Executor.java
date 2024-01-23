@@ -28,9 +28,10 @@ public class Executor {
         List<VehicleModel> vehicles = vehicleServices.getVehicle();
         for (VehicleModel vehicle : vehicles)
         {
-            LocalDateTime value = vehicle.getLocalDateTime().minus(Duration.ofMinutes(2));
+            LocalDateTime vehicleParkedTime = vehicle.getLocalDateTime();
             currLocalDateTime = LocalDateTime.now();
-            if(value.isAfter(currLocalDateTime))
+            vehicleParkedTime.plusMinutes((long)60);
+            if(vehicleParkedTime.isBefore(currLocalDateTime))
             {
                 System.out.println(vehicle.getSlotSrNumber());
                 log.info("--------------Unparking Vehicle-------------\n" + vehicle.getSlotSrNumber());
